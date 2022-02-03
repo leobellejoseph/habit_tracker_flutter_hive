@@ -4,9 +4,12 @@ enum TasksStatus { initial, loading, loaded, error }
 
 @immutable
 class TasksState {
-  final Task task;
+  final List<Task> tasks;
   final TasksStatus status;
-  const TasksState({required this.task, required this.status});
+  const TasksState({required this.tasks, required this.status});
   factory TasksState.initial() =>
-      TasksState(task: Task.empty(), status: TasksStatus.initial);
+      TasksState(tasks: [Task.empty()], status: TasksStatus.initial);
+
+  TasksState copyWith({List<Task>? tasks, TasksStatus? status}) =>
+      TasksState(tasks: tasks ?? [], status: status ?? TasksStatus.initial);
 }

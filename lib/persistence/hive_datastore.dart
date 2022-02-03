@@ -31,6 +31,14 @@ class HiveDataStore {
     }
   }
 
+  Future<List<Task>> fetchTasks() async {
+    final box = Hive.box<Task>(tasksBoxName);
+    if (box.isNotEmpty) {
+      return box.values.toList();
+    }
+    return [];
+  }
+
   ValueListenable<Box<Task>> tasksListenable() {
     return Hive.box<Task>(tasksBoxName).listenable();
   }

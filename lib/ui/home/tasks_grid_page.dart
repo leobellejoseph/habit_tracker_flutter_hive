@@ -1,35 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:habit_tracker_flutter/models/task.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:habit_tracker_flutter/bloc/bloc/tasks_bloc.dart';
 import 'package:habit_tracker_flutter/ui/home/tasks_grid.dart';
 import 'package:habit_tracker_flutter/ui/theming/app_theme.dart';
 
 class TasksGridPage extends StatelessWidget {
-  const TasksGridPage({Key? key, required this.tasks}) : super(key: key);
-  final List<Task> tasks;
+  const TasksGridPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.of(context).primary,
       body: SafeArea(
-        child: TasksGridContents(
-          tasks: tasks,
-        ),
+        child: TasksGridContents(),
       ),
     );
   }
 }
 
 class TasksGridContents extends StatelessWidget {
-  const TasksGridContents({Key? key, required this.tasks}) : super(key: key);
-  final List<Task> tasks;
+  const TasksGridContents({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-      child: TasksGrid(
-        tasks: tasks,
+      child: BlocBuilder<TasksBloc, TasksState>(
+        builder: (context, state) {
+          return TasksGrid(
+            tasks: state.tasks,
+          );
+        },
       ),
     );
   }

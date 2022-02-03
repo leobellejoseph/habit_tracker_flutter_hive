@@ -30,6 +30,7 @@ dependencies:
   hive_flutter: 1.0.0
   uuid: 3.0.1
   flutter_bloc: ^8.0.1
+  bloc: ^8.0.2
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:habit_tracker_flutter/bloc/bloc/tasks_bloc.dart';
 import 'package:habit_tracker_flutter/constants/app_assets.dart';
 import 'package:habit_tracker_flutter/constants/app_colors.dart';
 import 'package:habit_tracker_flutter/persistence/hive_datastore.dart';
@@ -10,10 +12,12 @@ Future<void> main() async {
   await AppAssets.preloadSVGs();
   final dataStore = HiveDataStore();
   await dataStore.init();
-  runApp(MyApp());
+  runApp(MyApp(data: dataStore));
 }
 
 class MyApp extends StatelessWidget {
+  final HiveDataStore data;
+  const MyApp({required this.data});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,7 +27,10 @@ class MyApp extends StatelessWidget {
       ),
       home: AppTheme(
         data: AppThemeData.defaultWithSwatch(AppColors.red),
-        child: HomePage(),
+        child: BlocProvider<TasksBloc>(
+          create: (context) => TasksBloc(data)..add(TasksFetchEvent()),
+          child: HomePage(),
+        ),
       ),
     );
   }
