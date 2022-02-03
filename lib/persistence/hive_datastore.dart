@@ -11,18 +11,10 @@ class HiveDataStore {
     await Hive.openBox<Task>(tasksBoxName);
   }
 
-  Future<void> createDemoTasks(
-      {required List<Task> tasks, bool force = true}) async {
-    final box = Hive.box<Task>(tasksBoxName);
-    if (box.isEmpty || force) {
-      await box.clear();
-      await box.addAll(tasks);
-    }
-  }
-
   Future<void> addTasks({required List<Task> tasks, bool force = true}) async {
     final box = Hive.box<Task>(tasksBoxName);
     if (box.isEmpty || force) {
+      await box.clear();
       await box.addAll(tasks);
     }
   }
@@ -31,6 +23,11 @@ class HiveDataStore {
     final box = Hive.box<Task>(tasksBoxName);
     if (box.isEmpty) {
       await box.add(task);
+    } else {
+      if (box.containsKey(tasksBoxName)) {
+        await box.delete(tasksBoxName);
+        await box.add(task);
+      }
     }
   }
 

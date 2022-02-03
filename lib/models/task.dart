@@ -18,4 +18,6 @@ class Task {
   });
   factory Task.create({required String name, required String iconName}) =>
       Task(id: Uuid().v1(), name: name, iconName: iconName);
+
+  factory Task.empty()=>Task(id:'0', iconName: 'NA',name: 'NA');
 }
