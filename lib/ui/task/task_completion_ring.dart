@@ -46,7 +46,7 @@ class RingPainter extends CustomPainter {
         ..strokeWidth = strokeWidth
         ..color = taskNotCompletedColor
         ..style = PaintingStyle.stroke;
-      canvas.drawCircle(center, radius, backgroundPaint);
+      canvas.drawCircle(center, radius - 10, backgroundPaint);
     }
 
     final foregroundPaint = Paint()
