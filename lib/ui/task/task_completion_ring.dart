@@ -10,7 +10,7 @@ class TaskCompletionRing extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = AppTheme.of(context);
     return AspectRatio(
-      aspectRatio: 1.0,
+      aspectRatio: 1,
       child: CustomPaint(
         painter: RingPainter(
           progress: progress,
