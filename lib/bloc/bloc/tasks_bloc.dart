@@ -13,16 +13,19 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       : _dataStore = dataStore,
         super(TasksState.initial()) {
     on<TasksFetchEvent>(fetchTasks);
-    on<TasksAddEvent>(addTasks);
+    on<TasksAddEvent>(addTask);
   }
 
   Future<void> fetchTasks(
       TasksFetchEvent event, Emitter<TasksState> emit) async {
     emit(state.copyWith(status: TasksStatus.loading));
     final tasks = await _dataStore.fetchTasks();
-    print('Tasks:${tasks.length}');
     emit(state.copyWith(tasks: tasks, status: TasksStatus.loaded));
   }
 
-  void addTasks(TasksAddEvent event, Emitter<TasksState> state) {}
+  Future<void> addTask(TasksAddEvent event, Emitter<TasksState> emit) async {
+    emit(state.copyWith(status: TasksStatus.adding));
+    await _dataStore.addTask(task: event.task);
+    emit(state.copyWith(status: TasksStatus.loaded));
+  }
 }

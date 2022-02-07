@@ -7,4 +7,7 @@ abstract class TasksEvent {}
 class TasksFetchEvent extends TasksEvent {}
 
 @immutable
-class TasksAddEvent extends TasksEvent {}
+class TasksAddEvent extends TasksEvent {
+  final Task task;
+  TasksAddEvent({required this.task});
+}

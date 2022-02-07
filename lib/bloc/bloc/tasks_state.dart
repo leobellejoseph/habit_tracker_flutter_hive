@@ -1,6 +1,6 @@
 part of 'tasks_bloc.dart';
 
-enum TasksStatus { initial, loading, loaded, error }
+enum TasksStatus { initial, loading, loaded, adding, added, error }
 
 @immutable
 class TasksState extends Equatable {

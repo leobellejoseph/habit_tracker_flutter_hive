@@ -27,9 +27,13 @@ class TasksGridContents extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
       child: BlocBuilder<TasksBloc, TasksState>(
         builder: (context, state) {
-          return TasksGrid(
-            tasks: state.tasks,
-          );
+          if (state.status == TasksStatus.loaded) {
+            return TasksGrid(tasks: state.tasks);
+          } else {
+            return Center(
+              child: CircularProgressIndicator(color: Colors.white),
+            );
+          }
         },
       ),
     );
