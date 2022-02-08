@@ -24,4 +24,7 @@ class TasksState extends Equatable {
 
   @override
   List<Object?> get props => [tasks, status];
+
+  @override
+  String toString() => 'Task:$tasks';
 }
