@@ -4,7 +4,7 @@ import 'package:habit_tracker_flutter/models/task_state.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class HiveDataStore {
-  static const tasksBoxName = 'tasks';
+  static const tasksBoxName = 'tasksBox';
   static const taskStateBoxName = 'taskState';
   static String taskStateKey(String key) => 'taskState/$key';
   Future<void> init() async {
@@ -14,6 +14,8 @@ class HiveDataStore {
     await Hive.openBox<Task>(tasksBoxName);
     await Hive.openBox<TaskState>(taskStateBoxName);
   }
+
+  
 
   Future<void> addTasks({required List<Task> tasks, bool force = true}) async {
     final box = Hive.box<Task>(tasksBoxName);

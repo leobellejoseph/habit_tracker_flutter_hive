@@ -10,6 +10,22 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: TasksGridContents(),
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     final tasks = TaskPreset.allPresets
+      //         .map(
+      //           (e) => Task(
+      //             id: Uuid().v1(),
+      //             name: e.name,
+      //             iconName: e.iconName,
+      //             completed: true,
+      //           ),
+      //         )
+      //         .toList();
+      //     context.read<TasksBloc>().add(TasksAddEvent(tasks: tasks));
+      //   },
+      //   child: Icon(Icons.add),
+      // ),
     );
   }
 }

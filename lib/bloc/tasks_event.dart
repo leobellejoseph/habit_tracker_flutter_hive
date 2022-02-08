@@ -8,6 +8,6 @@ class TasksFetchEvent extends TasksEvent {}
 
 @immutable
 class TasksAddEvent extends TasksEvent {
-  final Task task;
-  TasksAddEvent({required this.task});
+  final List<Task> tasks;
+  TasksAddEvent({required this.tasks});
 }
