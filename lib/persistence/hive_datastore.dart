@@ -15,8 +15,6 @@ class HiveDataStore {
     await Hive.openBox<TaskState>(taskStateBoxName);
   }
 
-  
-
   Future<void> addTasks({required List<Task> tasks, bool force = true}) async {
     final box = Hive.box<Task>(tasksBoxName);
     if (box.isEmpty || force) {
@@ -37,12 +35,34 @@ class HiveDataStore {
     }
   }
 
+  Future<void> addTaskState(
+      {required String taskId, required bool completed}) async {
+    final box = Hive.box<TaskState>(taskStateBoxName);
+    final taskState = TaskState(taskId: taskId, completed: completed);
+    if (box.isEmpty) {
+      await box.add(taskState);
+    } else {
+      if (box.containsKey(taskId)) {
+        await box.delete(taskId);
+        await box.add(taskState);
+      }
+    }
+  }
+
   Future<List<Task>> fetchTasks() async {
     final box = Hive.box<Task>(tasksBoxName);
     if (box.isNotEmpty) {
       return box.values.toList();
     }
     return [];
+  }
+
+  Future<TaskState> fetchTaskState() async {
+    final box = Hive.box<TaskState>(taskStateBoxName);
+    if (box.isNotEmpty) {
+      return box.values.toList().first;
+    }
+    return TaskState.empty();
   }
 
   ValueListenable<Box<Task>> tasksListenable() {

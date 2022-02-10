@@ -11,4 +11,6 @@ class TaskState {
   final bool completed;
 
   TaskState({required this.taskId, required this.completed});
+
+  factory TaskState.empty() => TaskState(taskId: '0', completed: false);
 }

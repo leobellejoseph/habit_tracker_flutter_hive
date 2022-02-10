@@ -3,17 +3,29 @@ part of 'task_state_bloc.dart';
 enum TaskStateStateStatus { initial, loading, loaded, adding, added, error }
 
 class TaskStateState extends Equatable {
-  final List<TaskState> taskStates;
+  final TaskState taskState;
   final TaskStateStateStatus status;
   final Failure failure;
   const TaskStateState(
-      {required this.taskStates, required this.status, required this.failure});
+      {required this.taskState, required this.status, required this.failure});
 
   factory TaskStateState.initial() => TaskStateState(
-      taskStates: [],
+      taskState: TaskState.empty(),
       failure: Failure.none(),
       status: TaskStateStateStatus.initial);
 
   @override
-  List<Object> get props => [taskStates, status, failure];
+  List<Object> get props => [taskState, status, failure];
+
+  TaskStateState copyWith({
+    TaskState? taskState,
+    TaskStateStateStatus? status,
+    Failure? failure,
+  }) {
+    return TaskStateState(
+      taskState: taskState ?? this.taskState,
+      status: status ?? this.status,
+      failure: failure ?? this.failure,
+    );
+  }
 }
