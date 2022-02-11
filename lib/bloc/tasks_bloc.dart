@@ -22,6 +22,8 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     try {
       emit(state.copyWith(status: TasksStatus.loading));
       final tasks = await _dataStore.fetchTasks();
+      // await Future.delayed(const Duration(seconds: 2));
+
       emit(state.copyWith(tasks: tasks, status: TasksStatus.loaded));
     } catch (e) {
       emit(state.copyWith(

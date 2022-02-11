@@ -30,8 +30,15 @@ class TasksGridContents extends StatelessWidget {
           if (state.status == TasksStatus.loaded) {
             return TasksGrid(tasks: state.tasks);
           } else {
-            return Center(
-              child: CircularProgressIndicator(color: Colors.white),
+            return LayoutBuilder(
+              builder: (context, size) {
+                return Center(
+                  child: SizedBox(
+                      height: size.maxHeight / 4,
+                      width: size.maxWidth / 2,
+                      child: CircularProgressIndicator(color: Colors.white)),
+                );
+              },
             );
           }
         },
