@@ -16,5 +16,5 @@ class TaskState {
       TaskState(taskId: taskId, completed: false);
 
   @override
-  String toString() => 'TaskState($taskId,$completed)';
+  String toString() => 'TaskState(taskId:$taskId,completed:$completed)';
 }

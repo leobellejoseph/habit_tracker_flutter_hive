@@ -22,7 +22,6 @@ class TaskStateBloc extends Bloc<TaskStateEvent, TaskStateState> {
     try {
       emit(state.copyWith(status: TaskStateStateStatus.loading));
       final taskState = await _dataStore.fetchTaskState(taskId: event.taskId);
-      print(taskState);
       emit(state.copyWith(
           taskState: taskState, status: TaskStateStateStatus.loaded));
     } catch (e) {

@@ -8,4 +8,7 @@ class Failure extends Equatable {
 
   @override
   List<Object?> get props => [code, message];
+
+  @override
+  String toString() => 'Failure(code:$code,message:$message)';
 }

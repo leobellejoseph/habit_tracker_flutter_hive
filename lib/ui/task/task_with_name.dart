@@ -8,15 +8,8 @@ import 'package:habit_tracker_flutter/ui/theming/app_theme.dart';
 
 class TaskWithName extends StatelessWidget {
   final Task task;
-  final bool completed;
-  final ValueChanged<bool>? onCompleted;
 
-  const TaskWithName({
-    Key? key,
-    required this.task,
-    this.completed = false,
-    this.onCompleted,
-  }) : super(key: key);
+  const TaskWithName({Key? key, required this.task}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,7 +26,6 @@ class TaskWithName extends StatelessWidget {
                   final bloc = context.read<TaskStateBloc>();
                   bloc.add(TaskStateAddEvent(task: task));
                 },
-                //onCompleted: onCompleted,
               );
             },
           ),

@@ -21,7 +21,6 @@ class TasksGrid extends StatelessWidget {
         // Use max(x, 0.1) to prevent layout error when keyword is visible in modal page
         final mainAxisSpacing =
             max((constraints.maxHeight - taskHeight * 3) / 2.0, 0.1);
-
         return GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
@@ -35,10 +34,7 @@ class TasksGrid extends StatelessWidget {
             return BlocProvider(
               create: (context) => TaskStateBloc(dataStore: dataStore)
                 ..add(TaskStateFetchEvent(taskId: task.id)),
-              child: TaskWithName(
-                task: task,
-
-              ),
+              child: TaskWithName(task: task),
             );
           },
           itemCount: tasks.length,

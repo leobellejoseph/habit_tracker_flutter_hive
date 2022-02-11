@@ -45,7 +45,6 @@ class HiveDataStore {
         await box.add(taskState);
       }
     }
-    print('add task state');
   }
 
   Future<List<Task>> fetchTasks() async {
@@ -68,12 +67,6 @@ class HiveDataStore {
   ValueListenable<Box<Task>> tasksListenable() {
     return Hive.box<Task>(tasksBoxName).listenable();
   }
-
-  // ValueListenable<Box<TaskState>> taskStateListenable({required Task task}) {
-  //   final box = Hive.box<TaskState>(taskStateBoxName);
-  //   final keys = <String>[taskStateKey(task.id)];
-  //   return box.listenable(keys: keys);
-  // }
 
   Future<void> setTaskState(
       {required Task task, required bool completed}) async {
