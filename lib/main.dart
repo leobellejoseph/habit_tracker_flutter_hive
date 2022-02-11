@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habit_tracker_flutter/bloc/tasks_bloc.dart';
 import 'package:habit_tracker_flutter/constants/constants.dart';
+import 'package:habit_tracker_flutter/observer/tasks_observer.dart';
+
 import 'package:habit_tracker_flutter/persistence/hive_datastore.dart';
 import 'ui/ui.dart';
 
@@ -10,7 +12,10 @@ Future<void> main() async {
   await AppAssets.preloadSVGs();
   final dataStore = HiveDataStore();
   await dataStore.init();
-  runApp(MyApp(dataStore: dataStore));
+  BlocOverrides.runZoned(
+    () => runApp(MyApp(dataStore: dataStore)),
+    blocObserver: TasksObserver(),
+  );
 }
 
 class MyApp extends StatelessWidget {
