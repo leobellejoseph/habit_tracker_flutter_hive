@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habit_tracker_flutter/bloc/task_state_bloc.dart';
 import 'package:habit_tracker_flutter/constants/text_styles.dart';
 import 'package:habit_tracker_flutter/models/task.dart';
-import 'package:habit_tracker_flutter/models/task_state.dart';
 import 'package:habit_tracker_flutter/ui/task/animated_task.dart';
 import 'package:habit_tracker_flutter/ui/theming/app_theme.dart';
 
