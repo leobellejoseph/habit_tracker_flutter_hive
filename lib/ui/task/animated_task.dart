@@ -45,8 +45,8 @@ class _AnimatedTaskState extends State<AnimatedTask>
   }
 
   void _checkStatusUpdates(AnimationStatus status) {
-    widget.onCompleted?.call(true);
     if (status == AnimationStatus.completed) {
+      widget.onCompleted?.call(true);
       if (mounted) {
         setState(() => _showCheckIcon = true);
       }

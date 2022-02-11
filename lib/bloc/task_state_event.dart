@@ -7,14 +7,15 @@ abstract class TaskStateEvent extends Equatable {
 }
 
 class TaskStateFetchEvent extends TaskStateEvent {
-  const TaskStateFetchEvent();
+  final String taskId;
+  const TaskStateFetchEvent({required this.taskId});
   @override
-  List<Object> get props => [];
+  List<Object> get props => [taskId];
 }
 
 class TaskStateAddEvent extends TaskStateEvent {
-  final TaskState taskState;
-  const TaskStateAddEvent({required this.taskState});
+  final Task task;
+  const TaskStateAddEvent({required this.task});
   @override
-  List<Object> get props => [taskState];
+  List<Object> get props => [task];
 }

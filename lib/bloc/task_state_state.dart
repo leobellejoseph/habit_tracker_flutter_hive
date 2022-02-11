@@ -10,7 +10,7 @@ class TaskStateState extends Equatable {
       {required this.taskState, required this.status, required this.failure});
 
   factory TaskStateState.initial() => TaskStateState(
-      taskState: TaskState.empty(),
+      taskState: TaskState.empty('0'),
       failure: Failure.none(),
       status: TaskStateStateStatus.initial);
 

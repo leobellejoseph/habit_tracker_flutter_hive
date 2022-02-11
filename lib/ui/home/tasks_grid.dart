@@ -1,6 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:habit_tracker_flutter/bloc/task_state_bloc.dart';
 import 'package:habit_tracker_flutter/models/task.dart';
+import 'package:habit_tracker_flutter/persistence/hive_datastore.dart';
 import 'package:habit_tracker_flutter/ui/task/task_with_name.dart';
 
 class TasksGrid extends StatelessWidget {
@@ -28,8 +31,14 @@ class TasksGrid extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             final task = tasks[index];
-            return TaskWithName(
-              task: task,
+            final dataStore = context.read<HiveDataStore>();
+            return BlocProvider(
+              create: (context) => TaskStateBloc(dataStore: dataStore)
+                ..add(TaskStateFetchEvent(taskId: task.id)),
+              child: TaskWithName(
+                task: task,
+
+              ),
             );
           },
           itemCount: tasks.length,
