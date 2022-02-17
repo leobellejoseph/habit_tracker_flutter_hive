@@ -11,3 +11,6 @@ class TasksAddEvent extends TasksEvent {
   final List<Task> tasks;
   TasksAddEvent({required this.tasks});
 }
+
+@immutable
+class TasksClearEvent extends TasksEvent {}

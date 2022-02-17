@@ -1,4 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:habit_tracker_flutter/bloc/tasks_bloc.dart';
+import 'package:habit_tracker_flutter/persistence/hive_datastore.dart';
 import 'package:habit_tracker_flutter/ui/home/tasks_grid_page.dart';
 import 'package:habit_tracker_flutter/ui/theming/app_theme.dart';
 
@@ -11,20 +15,8 @@ class HomePage extends StatelessWidget {
         child: TasksGridContents(),
       ),
       // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     final tasks = TaskPreset.allPresets
-      //         .map(
-      //           (e) => Task(
-      //             id: Uuid().v1(),
-      //             name: e.name,
-      //             iconName: e.iconName,
-      //             completed: true,
-      //           ),
-      //         )
-      //         .toList();
-      //     context.read<TasksBloc>().add(TasksAddEvent(tasks: tasks));
-      //   },
-      //   child: Icon(Icons.add),
+      //   onPressed: () => context.read<TasksBloc>().add(TasksClearEvent()),
+      //   child: Icon(Icons.clear_all),
       // ),
     );
   }

@@ -15,6 +15,22 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
         super(TasksState.initial()) {
     on<TasksFetchEvent>(fetchTasks);
     on<TasksAddEvent>(addTask);
+    on<TasksClearEvent>(clearTasks);
+  }
+
+  Future<void> clearTasks(
+      TasksClearEvent event, Emitter<TasksState> emit) async {
+    try {
+      emit(state.copyWith(status: TasksStatus.loading));
+      await _dataStore.clearTasks();
+      emit(state.copyWith(tasks: [], status: TasksStatus.loaded));
+    } catch (e) {
+      emit(
+        state.copyWith(
+            status: TasksStatus.error,
+            failure: Failure(code: 'Tasks Clear Error', message: e.toString())),
+      );
+    }
   }
 
   Future<void> fetchTasks(

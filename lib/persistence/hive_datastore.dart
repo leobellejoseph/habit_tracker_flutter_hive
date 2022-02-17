@@ -23,6 +23,13 @@ class HiveDataStore {
     }
   }
 
+  Future<void> clearTasks() async {
+    final box = Hive.box<Task>(tasksBoxName);
+    if (box.isEmpty == false) {
+      await box.clear();
+    }
+  }
+
   Future<void> addTask({required Task task}) async {
     final box = Hive.box<Task>(tasksBoxName);
     if (box.isEmpty) {

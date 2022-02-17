@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:habit_tracker_flutter/constants/app_assets.dart';
 
+@immutable
 class TaskPreset {
   const TaskPreset({required this.name, required this.iconName});
   final String name;
